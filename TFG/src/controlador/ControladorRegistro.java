@@ -33,6 +33,15 @@ public class ControladorRegistro implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== registro.btnRegistro){
             JOptionPane.showMessageDialog(null, "Se registrará el usuario...");
+            
+            String nombre = registro.txtNombre.getText();
+            String apellido = registro.txtApellidos.getText();
+            String fecha = String.valueOf(registro.jXDatePicker.getDate());
+            String nacionalidad = registro.txtNacionalidad.getText();
+            String localidad = registro.txtLocalidad.getText();
+            String usuario = registro.txtUsuario.getText();
+            String password = registro.txtPass.getText();
+            String password2 = registro.txtPass2.getText();
         }
         
         if(e.getSource() == registro.btnVolver){

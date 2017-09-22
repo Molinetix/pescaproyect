@@ -13,6 +13,7 @@ public class Usuario {
     
     private String nombre;
     private String apellido;
+    private String correo;
     private String fecha;
     private String nacionalidad;
     private String localidad;
@@ -23,9 +24,10 @@ public class Usuario {
         
     }
 
-    public Usuario(String nombre, String apellido, String fecha, String nacionalidad, String localidad, String usuario, String contrasenia) {
+    public Usuario(String nombre, String apellido, String correo, String fecha, String nacionalidad, String localidad, String usuario, String contrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.correo = correo;
         this.fecha = fecha;
         this.nacionalidad = nacionalidad;
         this.localidad = localidad;
@@ -47,6 +49,14 @@ public class Usuario {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getFecha() {
@@ -88,6 +98,8 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    
 
 
     

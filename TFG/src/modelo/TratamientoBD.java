@@ -43,11 +43,12 @@ public class TratamientoBD {
                 user = new Usuario();
                 user.setNombre(rs.getString(2));
                 user.setApellido(rs.getString(3));
-                user.setFecha(rs.getString(4));
-                user.setNacionalidad(rs.getString(5));
-                user.setLocalidad(rs.getString(6));
-                user.setUsuario(rs.getString(7));
-                user.setContrasenia(rs.getString(8));
+                user.setCorreo(rs.getString(4));
+                user.setFecha(rs.getString(5));
+                user.setNacionalidad(rs.getString(6));
+                user.setLocalidad(rs.getString(7));
+                user.setUsuario(rs.getString(8));
+                user.setContrasenia(rs.getString(9));
                 
                 obtenUsuario.add(user);
                 
@@ -64,20 +65,21 @@ public class TratamientoBD {
     }
     
     
-    public int realizarRegistro(String nombre,String apellido,String fecha, String nacionalidad,String localidad, String usuario, String password) throws ControladorError{
+    public int realizarRegistro(String nombre,String apellido, String correo, String fecha, String nacionalidad,String localidad, String usuario, String password) throws ControladorError{
         int respuesta = 0;
         
         Connection accesoDB = con.getConexion();
         
         try {
-            CallableStatement cs = accesoDB.prepareCall("{call sp_registrar(?,?,?,?,?,?,?)}");
+            CallableStatement cs = accesoDB.prepareCall("{call sp_registrar(?,?,?,?,?,?,?,?)}");
             cs.setString(1, nombre);
             cs.setString(2, apellido);
-            cs.setString(3, fecha);
-            cs.setString(4, nacionalidad);
-            cs.setString(5, localidad);
-            cs.setString(6, usuario);
-            cs.setString(7, password);
+            cs.setString(3, correo);
+            cs.setString(4, fecha);
+            cs.setString(5, nacionalidad);
+            cs.setString(6, localidad);
+            cs.setString(7, usuario);
+            cs.setString(8, password);
             
             respuesta = cs.executeUpdate();
             
