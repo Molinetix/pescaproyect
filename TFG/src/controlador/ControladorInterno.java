@@ -5,17 +5,21 @@
  */
 package controlador;
 
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import modelo.TratamientoBD;
 import modelo.Usuario;
 import vista.JFInicio;
 import vista.JFLogin;
 import vista.JFRegistro;
+import vista.JFRecuperaPass;
 
 /**
  *
@@ -33,6 +37,13 @@ public class ControladorInterno implements ActionListener {
 
         panelLogin.btnEntrar.addActionListener(this);
         panelLogin.btnRegistrar.addActionListener(this);
+        panelLogin.btnRecuperaPass.addActionListener(this);
+        
+        panelLogin.btnRecuperaPass.setFocusPainted(false);
+        //panelLogin.btnRecuperaPass.setMargin(new Insets(0, 0, 0, 0));
+        panelLogin.btnRecuperaPass.setContentAreaFilled(false);
+        panelLogin.btnRecuperaPass.setBorderPainted(false);
+        panelLogin.btnRecuperaPass.setOpaque(false);
 
     }
 
@@ -73,6 +84,14 @@ public class ControladorInterno implements ActionListener {
         ControladorRegistro contRegistro = null;
         contRegistro = new ControladorRegistro(trataBD, registro);
     }
+    
+    public void accederRecuperacion(){
+        JFRecuperaPass newPass = new JFRecuperaPass();
+        newPass.setVisible(true);
+        newPass.setLocationRelativeTo(null);
+        
+        ControladorRecuperacion recuperacion = new ControladorRecuperacion(trataBD, newPass);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -97,10 +116,10 @@ public class ControladorInterno implements ActionListener {
                 } else {
 
                     String user = datosUsuario.get(0).getUsuario();
-                    
+
                     System.out.println();
                     System.out.println("accediendo al panel de usuario...");
-                    
+
                     accederInicio(usuario);
 
                 }
@@ -110,6 +129,12 @@ public class ControladorInterno implements ActionListener {
         if (e.getSource() == panelLogin.btnRegistrar) {
 
             accederRegistro();
+
+        }
+
+        if (e.getSource() == panelLogin.btnRecuperaPass) {
+            accederRecuperacion();
+            System.out.println("recuperando pass...");
 
         }
     }
