@@ -25,7 +25,6 @@ public class ControladorInterno implements ActionListener {
 
     JFLogin panelLogin = new JFLogin();
     TratamientoBD trataBD = new TratamientoBD();
-    
 
     public ControladorInterno(JFLogin panelLogin, TratamientoBD trataBD) {
 
@@ -34,9 +33,6 @@ public class ControladorInterno implements ActionListener {
 
         panelLogin.btnEntrar.addActionListener(this);
         panelLogin.btnRegistrar.addActionListener(this);
-        
-     
-        
 
     }
 
@@ -53,6 +49,29 @@ public class ControladorInterno implements ActionListener {
         }
 
         return comprobacion;
+    }
+
+    public void volverLogin() {
+
+    }
+
+    public void accederInicio(String usuario) {
+
+        JFInicio inicio = new JFInicio();
+
+        inicio.setVisible(true);
+        inicio.setLocationRelativeTo(null);
+        ControladorUsuario contUser = new ControladorUsuario(inicio, trataBD);
+        contUser.inicio.txtUsuario.setText(usuario);
+    }
+
+    public void accederRegistro() {
+        JFRegistro registro = new JFRegistro();
+        registro.setVisible(true);
+        registro.setLocationRelativeTo(null);
+
+        ControladorRegistro contRegistro = null;
+        contRegistro = new ControladorRegistro(trataBD, registro);
     }
 
     @Override
@@ -73,41 +92,25 @@ public class ControladorInterno implements ActionListener {
                 }
 
                 if (datosUsuario.size() < 1) {
-                    JOptionPane.showMessageDialog(null, "Error en la consulta");
+                    JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos.");
                     System.out.println("Error en la consulta");
                 } else {
+
+                    String user = datosUsuario.get(0).getUsuario();
                     
-                    JFInicio inicio = new JFInicio();
+                    System.out.println();
+                    System.out.println("accediendo al panel de usuario...");
                     
-                    inicio.setVisible(true);
-                    inicio.setLocationRelativeTo(null);
-       
-                    
-                    ControladorUsuario contUser = new ControladorUsuario(inicio, trataBD);
-                    contUser.inicio.txtUsuario.setText(datosUsuario.get(0).getUsuario());
-                    
-                    for (int i = 0; i < datosUsuario.size(); i++) {
-                        System.out.println(datosUsuario.get(i).getNombre());
-                        System.out.println(datosUsuario.get(i).getApellido());
-                        System.out.println(datosUsuario.get(i).getFecha());
-                        System.out.println(datosUsuario.get(i).getNacionalidad());
-                        System.out.println(datosUsuario.get(i).getLocalidad());
-                        System.out.println(datosUsuario.get(i).getUsuario());
-                        System.out.println(datosUsuario.get(i).getContrasenia());
-                    }
+                    accederInicio(usuario);
+
                 }
 
             }
         }
         if (e.getSource() == panelLogin.btnRegistrar) {
 
-            JFRegistro registro = new JFRegistro();
-            registro.setVisible(true);
-            registro.setLocationRelativeTo(null);
-            
-            ControladorRegistro contRegistro = null;
-            contRegistro = new ControladorRegistro(trataBD, registro);
-            
+            accederRegistro();
+
         }
     }
 

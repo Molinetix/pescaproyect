@@ -25,6 +25,7 @@ public class ControladorRegistro implements ActionListener{
         this.registro = registro;
         
         registro.btnRegistro.addActionListener(this);
+        registro.btnVolver.addActionListener(this);
     }
     
     
@@ -32,6 +33,10 @@ public class ControladorRegistro implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== registro.btnRegistro){
             JOptionPane.showMessageDialog(null, "Se registrará el usuario...");
+        }
+        
+        if(e.getSource() == registro.btnVolver){
+            registro.dispose();
         }
     }
     

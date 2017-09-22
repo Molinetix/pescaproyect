@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.TratamientoBD;
 import vista.JFInicio;
+import vista.JFLogin;
 
 /**
  *
@@ -27,6 +28,8 @@ public class ControladorUsuario implements ActionListener{
         this.bd = bd;
         this.inicio = inicio;
         
+        inicio.btnCerrar.addActionListener(this);
+        
     
     }
     
@@ -35,8 +38,18 @@ public class ControladorUsuario implements ActionListener{
         return id;
     }
     
+    
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == inicio.btnCerrar){
+            
+            System.out.println();
+            System.out.println("cerrando sesión...");
+            
+            inicio.dispose();
+            
+        }
         
         
     }
