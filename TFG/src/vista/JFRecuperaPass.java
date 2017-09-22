@@ -32,7 +32,7 @@ public class JFRecuperaPass extends javax.swing.JFrame {
         btnEnviarPass = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Introduce tu correo");
 
