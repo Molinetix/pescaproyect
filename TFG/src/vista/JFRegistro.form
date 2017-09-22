@@ -66,7 +66,7 @@
                               <Component id="txtPass2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="47" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -143,7 +143,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="fecha"/>
+        <Property name="text" type="java.lang.String" value="fecha de nacimiento"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">

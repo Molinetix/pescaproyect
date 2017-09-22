@@ -54,7 +54,7 @@ public class JFRegistro extends javax.swing.JFrame {
 
         jLabel2.setText("apellidos");
 
-        jLabel3.setText("fecha");
+        jLabel3.setText("fecha de nacimiento");
 
         jLabel4.setText("nacionalidad");
 
@@ -146,7 +146,7 @@ public class JFRegistro extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                                 .addComponent(txtPass2, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 47, Short.MAX_VALUE)))
+                        .addGap(0, 37, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
