@@ -7,6 +7,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.TratamientoBD;
 import vista.JFRecuperaPass;
@@ -29,16 +31,34 @@ public class ControladorRecuperacion implements ActionListener{
         
         
     }
+    
+    public boolean validarCorreo(String mail){
+        boolean validado = false;
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                        
+        Matcher mather = pattern.matcher(mail);
+        
+        if(mather.find() == true){
+            validado = true;
+        }
+        
+        return validado;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == pass.btnEnviarPass){
             String mail = pass.txtCorreo.getText();
-            if(mail.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Por favor introduce el correo...");
+            
+            System.out.println(validarCorreo(mail));
+            
+            if(!validarCorreo(mail)){
+                JOptionPane.showMessageDialog(null, "Por favor introduzca el correo correctamente");
             }else{
                 JOptionPane.showMessageDialog(null, "Compruebe su correo, mensaje enviado!");
+                pass.dispose();
             }
         }
         
