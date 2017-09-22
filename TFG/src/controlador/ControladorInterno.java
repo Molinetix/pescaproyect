@@ -21,12 +21,18 @@ import vista.JFLogin;
 import vista.JFRegistro;
 import vista.JFRecuperaPass;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author Sergio
  */
 public class ControladorInterno implements ActionListener {
 
+    private static final char[] CONSTS_HEX = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+
+    
     JFLogin panelLogin = new JFLogin();
     TratamientoBD trataBD = new TratamientoBD();
 
@@ -62,6 +68,27 @@ public class ControladorInterno implements ActionListener {
         return comprobacion;
     }
 
+     public static String encriptaEnMD5(String stringAEncriptar)
+    {
+        try
+        {
+           MessageDigest msgd = MessageDigest.getInstance("MD5");
+           byte[] bytes = msgd.digest(stringAEncriptar.getBytes());
+           StringBuilder strbCadenaMD5 = new StringBuilder(2 * bytes.length);
+           for (int i = 0; i < bytes.length; i++)
+           {
+               int bajo = (int)(bytes[i] & 0x0f);
+               int alto = (int)((bytes[i] & 0xf0) >> 4);
+               strbCadenaMD5.append(CONSTS_HEX[alto]);
+               strbCadenaMD5.append(CONSTS_HEX[bajo]);
+           }
+           return strbCadenaMD5.toString();
+        } catch (NoSuchAlgorithmException e) {
+           return null;
+        }
+    }
+    
+    
     public void volverLogin() {
 
     }
@@ -98,14 +125,16 @@ public class ControladorInterno implements ActionListener {
 
         if (e.getSource() == panelLogin.btnEntrar) {
             if (compruebaCampos() == true) {
+                
                 System.out.println("comprobando....");
                 String usuario = panelLogin.txtUsuario.getText();
                 String password = panelLogin.txtPassword.getText();
+                String passwordCodificada = encriptaEnMD5(password);
 
                 ArrayList<Usuario> datosUsuario = new ArrayList();
-
+                
                 try {
-                    datosUsuario = trataBD.comprobarLogin(usuario, password);
+                    datosUsuario = trataBD.comprobarLogin(usuario, passwordCodificada);
                 } catch (ControladorError ex) {
                     System.out.println(ex);
                 }
