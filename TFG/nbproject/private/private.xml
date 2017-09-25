@@ -3,14 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/vista/JFLogin.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/vista/JFRegistro.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/modelo/TratamientoBD.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/controlador/Conexion.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/controlador/ControladorInterno.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/modelo/Usuario.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/vista/JFInicio.java</file>
-            <file>file:/C:/Users/Sergio/Documents/NetBeansProjects/TFG/src/tfg/TFG.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/vista/JFRegistro.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/modelo/TratamientoBD.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/vista/JFLogin.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/controlador/ControladorRegistro.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/vista/JFRecuperaPass.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/vista/JFInicio.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/controlador/ControladorUsuario.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/modelo/Usuario.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/tfg/TFG.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/controlador/ControladorInterno.java</file>
+            <file>file:/C:/Users/Sergio/Documents/GitHub/pescaproyect/TFG/src/controlador/ControladorRecuperacion.java</file>
         </group>
     </open-files>
 </project-private>
