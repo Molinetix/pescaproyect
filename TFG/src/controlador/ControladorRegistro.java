@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -23,8 +24,8 @@ import vista.JFRegistro;
  */
 public class ControladorRegistro implements ActionListener {
 
-    private static final char[] CONSTS_HEX = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
-    
+    private static final char[] CONSTS_HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
     TratamientoBD bd = new TratamientoBD();
     JFRegistro registro = new JFRegistro();
 
@@ -34,8 +35,8 @@ public class ControladorRegistro implements ActionListener {
 
         registro.btnRegistro.addActionListener(this);
         registro.btnVolver.addActionListener(this);
-        
-        registro.jXDatePicker.setEnabled(false);
+
+        registro.jXDatePicker.setFormats("dd/MM/yyyy");
     }
 
     public static String encriptaEnMD5(String stringAEncriptar) {
@@ -74,10 +75,13 @@ public class ControladorRegistro implements ActionListener {
         if (e.getSource() == registro.btnRegistro) {
             JOptionPane.showMessageDialog(null, "Se registrará el usuario...");
 
+            SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+  
+
             String nombre = registro.txtNombre.getText();
             String apellido = registro.txtApellidos.getText();
             String correo = registro.txtCorreo.getText();
-            String fecha = String.valueOf(registro.jXDatePicker.getDate());
+            String fecha = String.valueOf(formater.format(registro.jXDatePicker.getDate()));
             String nacionalidad = registro.txtNacionalidad.getText();
             String localidad = registro.txtLocalidad.getText();
             String usuario = registro.txtUsuario.getText();
@@ -85,7 +89,7 @@ public class ControladorRegistro implements ActionListener {
             String password2 = registro.txtPass2.getText();
 
             String passwordEncriptada = encriptaEnMD5(password);
-            
+
             if (!validarCorreo(correo)) {
                 JOptionPane.showMessageDialog(null, "El correo introducido no es correcto");
             }

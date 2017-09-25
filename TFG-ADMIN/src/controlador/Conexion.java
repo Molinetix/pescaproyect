@@ -25,7 +25,7 @@ public class Conexion {
         
          try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tfgadminpescapp","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tfgpescapp","root","");
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
 
         }
