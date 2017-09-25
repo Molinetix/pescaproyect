@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.TratamientoBD;
 import vista.JFRegistro;
+import vista.JFRegistro2;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ControladorRegistro implements ActionListener {
         this.bd = bd;
         this.registro = registro;
 
-        registro.btnRegistro.addActionListener(this);
+        registro.btnSiguiente.addActionListener(this);
         registro.btnVolver.addActionListener(this);
 
         registro.jXDatePicker.setFormats("dd/MM/yyyy");
@@ -72,47 +73,75 @@ public class ControladorRegistro implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == registro.btnRegistro) {
-            JOptionPane.showMessageDialog(null, "Se registrará el usuario...");
+        if (e.getSource() == registro.btnSiguiente) {
 
             SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-  
 
-            String nombre = registro.txtNombre.getText();
-            String apellido = registro.txtApellidos.getText();
-            String correo = registro.txtCorreo.getText();
-            String fecha = String.valueOf(formater.format(registro.jXDatePicker.getDate()));
-            String nacionalidad = registro.txtNacionalidad.getText();
-            String localidad = registro.txtLocalidad.getText();
-            String usuario = registro.txtUsuario.getText();
-            String password = registro.txtPass.getText();
-            String password2 = registro.txtPass2.getText();
-
-            String passwordEncriptada = encriptaEnMD5(password);
-
-            if (!validarCorreo(correo)) {
-                JOptionPane.showMessageDialog(null, "El correo introducido no es correcto");
-            }
-
-            if (!password.matches(password2)) {
-                JOptionPane.showMessageDialog(null, "Las contraseñas deben coincidir");
-            }
-
-            if (validarCorreo(correo) && password.matches(password2)) {
-                System.out.println(passwordEncriptada);
-                try {
-                    int resultado = bd.realizarRegistro(nombre, apellido, correo, fecha, nacionalidad, localidad, usuario, passwordEncriptada);
-                    if (resultado > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro insertado con éxito");
-                        registro.dispose();
-                    } else {
-                        System.out.println("Error en la inserción");
-                    }
-                } catch (ControladorError ex) {
-                    System.out.println(ex);
-                }
+            String nombre = null;
+            String apellido = null;
+            String fecha = null;
+            String nacionalidad = null;
+            String localidad = null;
+            
+            if (registro.txtNombre.getText().isEmpty()) {
+                registro.labelNombre.setText("Introduzca un nombre");
             } else {
-                System.out.println("Error en el registro de usuario");
+                nombre = registro.txtNombre.getText();
+            }
+            
+            apellido = registro.txtApellidos.getText();
+            fecha = String.valueOf(formater.format(registro.jXDatePicker.getDate()));
+
+            String cp = registro.txtCP.getText();
+            nacionalidad = registro.txtNacionalidad.getText();
+            localidad = registro.txtLocalidad.getText();
+
+            boolean comprobacion = false;
+
+            if (comprobacion) {
+
+                registro.dispose();
+
+                JFRegistro2 registro2 = new JFRegistro2();
+                registro2.setVisible(true);
+                registro2.setLocationRelativeTo(null);
+
+                if (e.getSource() == registro2.btnRegistrarse) {
+
+                    System.out.println("esto es una prueba");
+
+                    String correo = registro2.txtCorreo.getText();
+                    String usuario = registro2.txtUsuario.getText();
+                    String password = registro2.txtPass.getText();
+                    String password2 = registro2.txtPass2.getText();
+
+                    String passwordEncriptada = encriptaEnMD5(password);
+
+                    if (!validarCorreo(correo)) {
+                        JOptionPane.showMessageDialog(null, "El correo introducido no es correcto");
+                    }
+
+                    if (!password.matches(password2)) {
+                        JOptionPane.showMessageDialog(null, "Las contraseñas deben coincidir");
+                    }
+
+                    if (validarCorreo(correo) && password.matches(password2)) {
+                        System.out.println(passwordEncriptada);
+                        try {
+                            int resultado = bd.realizarRegistro(nombre, apellido, correo, fecha, nacionalidad, localidad, usuario, passwordEncriptada);
+                            if (resultado > 0) {
+                                JOptionPane.showMessageDialog(null, "Registro insertado con éxito");
+                                registro.dispose();
+                            } else {
+                                System.out.println("Error en la inserción");
+                            }
+                        } catch (ControladorError ex) {
+                            System.out.println(ex);
+                        }
+                    } else {
+                        System.out.println("Error en el registro de usuario");
+                    }
+                }
             }
         }
 
