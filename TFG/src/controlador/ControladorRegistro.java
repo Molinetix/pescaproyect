@@ -7,6 +7,10 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -19,6 +23,8 @@ import vista.JFRegistro;
  */
 public class ControladorRegistro implements ActionListener {
 
+    private static final char[] CONSTS_HEX = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
+    
     TratamientoBD bd = new TratamientoBD();
     JFRegistro registro = new JFRegistro();
 
@@ -28,6 +34,25 @@ public class ControladorRegistro implements ActionListener {
 
         registro.btnRegistro.addActionListener(this);
         registro.btnVolver.addActionListener(this);
+        
+        registro.jXDatePicker.setEnabled(false);
+    }
+
+    public static String encriptaEnMD5(String stringAEncriptar) {
+        try {
+            MessageDigest msgd = MessageDigest.getInstance("MD5");
+            byte[] bytes = msgd.digest(stringAEncriptar.getBytes());
+            StringBuilder strbCadenaMD5 = new StringBuilder(2 * bytes.length);
+            for (int i = 0; i < bytes.length; i++) {
+                int bajo = (int) (bytes[i] & 0x0f);
+                int alto = (int) ((bytes[i] & 0xf0) >> 4);
+                strbCadenaMD5.append(CONSTS_HEX[alto]);
+                strbCadenaMD5.append(CONSTS_HEX[bajo]);
+            }
+            return strbCadenaMD5.toString();
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
     }
 
     public boolean validarCorreo(String mail) {
@@ -51,12 +76,40 @@ public class ControladorRegistro implements ActionListener {
 
             String nombre = registro.txtNombre.getText();
             String apellido = registro.txtApellidos.getText();
+            String correo = registro.txtCorreo.getText();
             String fecha = String.valueOf(registro.jXDatePicker.getDate());
             String nacionalidad = registro.txtNacionalidad.getText();
             String localidad = registro.txtLocalidad.getText();
             String usuario = registro.txtUsuario.getText();
             String password = registro.txtPass.getText();
             String password2 = registro.txtPass2.getText();
+
+            String passwordEncriptada = encriptaEnMD5(password);
+            
+            if (!validarCorreo(correo)) {
+                JOptionPane.showMessageDialog(null, "El correo introducido no es correcto");
+            }
+
+            if (!password.matches(password2)) {
+                JOptionPane.showMessageDialog(null, "Las contraseñas deben coincidir");
+            }
+
+            if (validarCorreo(correo) && password.matches(password2)) {
+                System.out.println(passwordEncriptada);
+                try {
+                    int resultado = bd.realizarRegistro(nombre, apellido, correo, fecha, nacionalidad, localidad, usuario, passwordEncriptada);
+                    if (resultado > 0) {
+                        JOptionPane.showMessageDialog(null, "Registro insertado con éxito");
+                        registro.dispose();
+                    } else {
+                        System.out.println("Error en la inserción");
+                    }
+                } catch (ControladorError ex) {
+                    System.out.println(ex);
+                }
+            } else {
+                System.out.println("Error en el registro de usuario");
+            }
         }
 
         if (e.getSource() == registro.btnVolver) {

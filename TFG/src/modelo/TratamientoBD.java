@@ -69,9 +69,9 @@ public class TratamientoBD {
         int respuesta = 0;
         
         Connection accesoDB = con.getConexion();
-        
+        System.out.println(nombre+", "+apellido+", "+correo+", "+fecha+", "+nacionalidad+", "+localidad+", "+usuario+", "+password);
         try {
-            CallableStatement cs = accesoDB.prepareCall("{call sp_registrar(?,?,?,?,?,?,?,?)}");
+            CallableStatement cs = accesoDB.prepareCall("{call sp_registro(?,?,?,?,?,?,?,?)}");
             cs.setString(1, nombre);
             cs.setString(2, apellido);
             cs.setString(3, correo);
